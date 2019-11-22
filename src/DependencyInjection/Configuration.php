@@ -16,7 +16,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('fm_summernote');
-        $rootNode = $treeBuilder->getRootNode();
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('fm_elfinder');
+        }
 
         $rootNode
             ->children()
